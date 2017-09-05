@@ -1,2 +1,7 @@
+<<<<<<< HEAD
+my.cnf
+*.pyc
+=======
 *.pyc
 sharet/my.cnf
+>>>>>>> f2d5e52ac63372a1247a0d42a8e7a76aef010def
