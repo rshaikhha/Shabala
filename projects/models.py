@@ -18,6 +18,13 @@ class Project(models.Model):
     def __unicode__(self):
         return self.title
 
+class ProjectFile(models.Model):
+    project = models.ForeignKey(Project)
+    file = models.FileField(upload_to='projects/images/')
+
+    def __unicode__(self):
+        return self.project.title
+
 class Tender(models.Model):
     tender = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)

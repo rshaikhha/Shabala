@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import Project,Tender
+from .models import Project,Tender,ProjectFile
 # Register your models here.
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -28,3 +28,4 @@ class TenderAdmin(admin.ModelAdmin):
 
 admin.site.register(Tender,TenderAdmin)
 admin.site.register(Project,ProjectAdmin)
+admin.site.register(ProjectFile)
