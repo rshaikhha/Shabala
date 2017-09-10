@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
+from time import gmtime, strftime
+from django.core.urlresolvers import reverse
 # Create your models here.
 
 
@@ -13,10 +15,26 @@ class Project(models.Model):
     created_time = models.DateTimeField(auto_now_add=True,auto_now=False)
     dead_line = models.DateTimeField(auto_now_add=False,auto_now=False)
     public = models.BooleanField(default=True)
+    slug = models.SlugField(unique=True)
+    
     #tender = models.ManyToManyField(Profile)
+
+    class Meta:
+        unique_together = ('title','slug')
 
     def __unicode__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("single_project",kwargs={"slug" : self.slug})
+
+    def save(self):
+        super(Project, self).save()
+        stime = strftime("%H%M%S", gmtime()) 
+        self.slug = '%s%s' % (
+            self.owner.username, stime
+        )    
+        super(Project, self).save()
 
 class ProjectFile(models.Model):
     project = models.ForeignKey(Project)
