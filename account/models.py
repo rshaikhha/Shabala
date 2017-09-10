@@ -10,7 +10,7 @@ from django.db.models.signals import post_save
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_pic_url = models.URLField()
+    profile_pic = models.ImageField(upload_to='profiles/images/')
     date_time = models.DateTimeField(auto_now_add=True,auto_now=False)
     update_time = models.DateTimeField(auto_now_add=False,auto_now=True)
     description = models.TextField()        

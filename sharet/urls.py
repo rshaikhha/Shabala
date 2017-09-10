@@ -18,6 +18,8 @@ from django.contrib import admin
 from account import views as account_views
 from django.contrib.auth import views as auth_views
 from projects import views as project_views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -30,4 +32,8 @@ urlpatterns = [
         account_views.activate, name='activate'),
     url(r'^project/(?P<slug>[\w-]+)/$', project_views.project, name='single_project'),
     url(r'^projects/$', project_views.projects, name='all_projects'),
+    url(r'^profile/(?P<username>[\w-]+)/$', account_views.profile, name='single_profile'),
 ]
+
+if settings.DEBUG :
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
