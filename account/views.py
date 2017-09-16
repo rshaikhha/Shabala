@@ -13,6 +13,8 @@ from django.template.loader import render_to_string
 from forms import SignUpForm
 from tokens import account_activation_token
 from django.utils.encoding import force_text
+from .models import Profile
+from django.http import Http404
 # Create your views here.
 
 def home (request):
@@ -60,3 +62,14 @@ def activate(request, uidb64, token):
         return redirect('home')
     else:
         return render(request, 'registration/account_activation_invalid.html')
+
+
+def profile(request,username):
+    try:
+        user = User.objects.get(username=username)
+        profile = Profile.objects.get(user=user)
+        context = {'profile':profile}
+        template = "profile.html"
+        return render(request, template, context)
+    except:
+        raise Http404("User not found!")
