@@ -68,7 +68,11 @@ def profile(request,username):
     try:
         user = User.objects.get(username=username)
         profile = Profile.objects.get(user=user)
-        context = {'profile':profile}
+        if request.user.is_authenticated():
+            cur = "yes"
+        else:
+            cur = "no"
+        context = {'profile':profile, 'us': cur}
         template = "profile.html"
         return render(request, template, context)
     except:
