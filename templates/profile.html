@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+{{profile.profile_pic.url}}
 <h1>{{ profile.user.username }}</h1>
 <h2>{{ us }}</h2>
 <img src="{{profile.profile_pic.url}}"/ width="150px" height="150px">
