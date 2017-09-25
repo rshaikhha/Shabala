@@ -1,13 +1,25 @@
-{% extends 'base.html' %}
-{% load bootstrap4 %}
+{% extends 'base_form.html' %}
+{% load bootstrap3 %}
+{# Load CSS and JavaScript #}
+
 {% block title %}Login{% endblock %}
 
 {% block content %}
 
-    <form role="form" method="post">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons submit='OK' reset="Cancel" %}{% endbuttons %}
-    </form>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Please Login</div>
+            <div class="panel-body">
+                <form role="form" method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <button class="btn btn-primary" style="width:100%">Login</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+  </div>
 
 {% endblock %}
