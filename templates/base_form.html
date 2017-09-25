@@ -69,6 +69,12 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
             <li><a href="../navbar-static-top/">Static top</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'single_profile' user.get_username %}">hello {{ user.first_name }}</a></li>
+            <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
+          {% else %}
+            <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
+          {% endif %} 
             <li><a href="../navbar-fixed-top/">Fixed top</a></li>
           </ul>
         </div><!--/.nav-collapse -->

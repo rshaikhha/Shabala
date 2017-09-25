@@ -3,8 +3,7 @@
 {# Load the tag library #}
 {% load bootstrap3 %}
 
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
+
 
 
 
@@ -21,10 +20,15 @@
     <title>Jumbotron Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
     <!--link href='{% static "css/bootstrap.min.css" %}' rel="stylesheet"-->
 
     <!-- Custom styles for this template -->
     <!--link href='{% static "css/jumbotron.css" %}' rel="stylesheet"-->
+    {% block style %}
+    
+    {% endblock %}
   </head>
 
   <body>
@@ -60,22 +64,31 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-            <li><a href="../navbar-static-top/">Static top</a></li>
-            <li><a href="../navbar-fixed-top/">Fixed top</a></li>
-          </ul>
+              <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
+              <li><a href="../navbar-static-top/">Static top</a></li>
+              {% if user.is_authenticated %}
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.first_name }} <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{% url 'single_profile' user.get_username %}">Profile</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">Nav header</li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+                  </ul>
+                </li>  
+            {% else %}
+              <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
+            {% endif %} 
+              <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+            </ul>
         </div><!--/.nav-collapse -->
       </div><!--/.container-fluid -->
     </nav>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-3">Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-      </div>
-    </div>
+    
 
     <div class="container">
       {% block content %}
@@ -101,5 +114,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--script src="../../../../assets/js/ie10-viewport-bug-workaround.js"></script-->
     {% bootstrap_javascript %}
+
+    {% block script %}{% endblock %}
   </body>
 </html>
