@@ -1,11 +1,19 @@
-*/
-html,
-body {
+
+@font-face {
+    font-family: 'Yekan';
+    src: url('../fonts/BYekan.eot?#') format('eot'),  
+         url('../fonts/BYekan.woff') format('woff'),
+         url('../fonts/BYekan.ttf') format('truetype');
+    font-style:normal;
+    font-weight:normal;
+  }
+
+
+.body-custom {
     overflow-x: hidden; /* Prevent scroll on narrow devices */
+    font-family: Yekan, "Open Sans", Tahoma, Arial;
 }
-body {
-    padding-top: 100px;
-}
+
 footer {
     padding: 30px 0;
 }
@@ -13,6 +21,11 @@ footer {
 /*
  * Custom styles
  */
+ .navbar-nav>li>.dropdown-menu-right {
+    position: absolute;
+    right: 0px;
+    text-align: right;
+ }
 .navbar-brand {
     font-size: 24px;
 }
@@ -43,3 +56,29 @@ footer {
     transition: 0.8s;
     -webkit-transition:  0.8s;
 }
+
+.panel-custom {
+    border-color: #16a085 !important;
+}
+.panel-custom > .panel-heading {
+    background: #16a085; 
+    color: #ffffff;
+    border-color: #16a085;
+}
+
+.btn-custom {
+    background: #16a085; 
+}
+
+.navbar-brand {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    margin: auto;
+}
+.navbar-toggle {
+    z-index:3;
+}
+
